@@ -7,7 +7,7 @@ from sklearn.metrics import mean_squared_error, r2_score
 from sklearn.impute import SimpleImputer
 import matplotlib.pyplot as plt
 
-boston_df = pd.read_csv('boston.csv')
+boston_df = pd.read_csv('data/boston.csv')
 
 print("=== BOSTON DATASET STRUCTURE (from boston.csv) ===")
 print(f"Dataset shape: {boston_df.shape}")
