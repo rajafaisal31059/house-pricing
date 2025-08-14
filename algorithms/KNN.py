@@ -1,13 +1,9 @@
-
-
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsRegressor
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
-
-
 
 def run_knn_on_dataset(dataset_path, target_column, k=5):
     """
@@ -62,21 +58,20 @@ print("\n📊 Performance Metrics for Each Dataset:")
 print(results_df)
 
 
-# ===============================
-# Plot Comparison Charts
-# ===============================
+
 plt.figure(figsize=(12, 5))
 
-# RMSE Comparison
 plt.subplot(1, 3, 1)
 plt.bar(results_df["Dataset"], results_df["RMSE"], color="skyblue")
-plt.title("RMSE Comparison")
+plt.title("RMSE Comparison (Log Scale)")
+plt.yscale('log')  
 plt.xticks(rotation=45, ha="right")
 
-# MAE Comparison
+# MAE Comparison (Log Scale)
 plt.subplot(1, 3, 2)
 plt.bar(results_df["Dataset"], results_df["MAE"], color="orange")
-plt.title("MAE Comparison")
+plt.title("MAE Comparison (Log Scale)")
+plt.yscale('log')  
 plt.xticks(rotation=45, ha="right")
 
 # R² Comparison
