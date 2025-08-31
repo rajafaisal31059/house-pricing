@@ -12,23 +12,18 @@ def run_knn_on_dataset(dataset_path, target_column, k=5):
     # Load dataset
     df = pd.read_csv(dataset_path)
 
-    # Separate features (X) and target (y)
     X = df.drop(columns=[target_column])
     y = df[target_column]
 
-    # Split into training & testing sets
     X_train, X_test, y_train, y_test = train_test_split(
         X, y, test_size=0.2, random_state=42
     )
 
-    # Create and train KNN regressor
     knn = KNeighborsRegressor(n_neighbors=k)
     knn.fit(X_train, y_train)
 
-    # Predictions
     y_pred = knn.predict(X_test)
 
-    # Calculate metrics
     rmse = np.sqrt(mean_squared_error(y_test, y_pred))
     mae = mean_absolute_error(y_test, y_pred)
     r2 = r2_score(y_test, y_pred)
@@ -52,9 +47,8 @@ for dataset_path, target_col in datasets_info:
     res = run_knn_on_dataset(dataset_path, target_col, k=5)
     results.append(res)
 
-# Create results DataFrame
 results_df = pd.DataFrame(results)
-print("\n📊 Performance Metrics for Each Dataset:")
+print("\nPerformance Metrics for Each Dataset:")
 print(results_df)
 
 
@@ -67,7 +61,7 @@ plt.title("RMSE Comparison (Log Scale)")
 plt.yscale('log')  
 plt.xticks(rotation=45, ha="right")
 
-# MAE Comparison (Log Scale)
+# MAE Comparison 
 plt.subplot(1, 3, 2)
 plt.bar(results_df["Dataset"], results_df["MAE"], color="orange")
 plt.title("MAE Comparison (Log Scale)")

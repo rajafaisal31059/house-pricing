@@ -3,17 +3,13 @@ import math
 import random
 import matplotlib.pyplot as plt
 
-# ----------------------------
-# Helper Functions
-# ----------------------------
-
 def load_csv(filename):
     data = []
     with open(filename, 'r') as f:
         reader = csv.reader(f)
-        header = next(reader)  # skip header
+        header = next(reader)  
         for row in reader:
-            if '' not in row:  # skip rows with missing data
+            if '' not in row:  
                 data.append([float(x) for x in row])
     return data
 
@@ -33,9 +29,6 @@ def normalize_features(X):
 def add_bias_column(X):
     return [[1.0] + row for row in X]
 
-# ----------------------------
-# Linear Regression from Scratch
-# ----------------------------
 
 def predict(X, weights):
     return [sum(w*x for w, x in zip(weights, row)) for row in X]
@@ -61,10 +54,6 @@ def gradient_descent(X, y, learning_rate=0.01, epochs=1000):
 
     return weights
 
-# ----------------------------
-# Metrics
-# ----------------------------
-
 def rmse(y_true, y_pred):
     return math.sqrt(sum((p - t) ** 2 for p, t in zip(y_pred, y_true)) / len(y_true))
 
@@ -77,9 +66,6 @@ def r2_score(y_true, y_pred):
     ss_res = sum((t - p) ** 2 for t, p in zip(y_true, y_pred))
     return 1 - (ss_res / ss_tot if ss_tot != 0 else 0)
 
-# ----------------------------
-# Run on Multiple Datasets
-# ----------------------------
 
 datasets = ["data/boston.csv", "data/california.csv", "data/newyork.csv"]
 results = []
@@ -109,25 +95,22 @@ for file in datasets:
         "R2": r2_score(y_test, predictions)
     })
 
-# ----------------------------
-# Print Results
-# ----------------------------
 
-print("\n📊 Linear Regression from Scratch Performance:")
+print("\nLinear Regression from Scratch Performance:")
 print(f"{'Dataset':<20} {'RMSE':<15} {'MAE':<15} {'R2 Score'}")
 for r in results:
     print(f"{r['Dataset']:<20} {r['RMSE']:<15.4f} {r['MAE']:<15.4f} {r['R2']:.4f}")
 
 plt.figure(figsize=(12, 5))
 
-# RMSE Comparison (Log Scale)
+# RMSE Comparison 
 plt.subplot(1, 3, 1)
 plt.bar([r["Dataset"] for r in results], [r["RMSE"] for r in results], color="skyblue")
 plt.title("RMSE Comparison (Log Scale)")
 plt.yscale('log')  
 plt.xticks(rotation=45, ha="right")
 
-# MAE Comparison (Log Scale)
+# MAE Comparison 
 plt.subplot(1, 3, 2)
 plt.bar([r["Dataset"] for r in results], [r["MAE"] for r in results], color="orange")
 plt.title("MAE Comparison (Log Scale)")

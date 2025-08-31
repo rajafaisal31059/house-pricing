@@ -5,15 +5,7 @@ from sklearn.model_selection import train_test_split
 
 
 def load_and_preprocess(dataset_name):
-    """
-    Loads, cleans, and preprocesses the dataset.
-    - Handles missing values (median imputation)
-    - Standardizes features
-    - Splits into train/test sets
-
-    For the Boston dataset, also overwrites the original CSV with the
-    preprocessed features and the original target column appended back.
-    """
+ 
     if dataset_name == "boston":
         csv_path = "data/boston.csv"
         df = pd.read_csv(csv_path)

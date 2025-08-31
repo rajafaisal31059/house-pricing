@@ -8,16 +8,7 @@ from sklearn.pipeline import Pipeline
 
 
 def preprocess_california(csv_path: str = "data/california.csv"):
-    """Preprocess the California housing dataset and overwrite the CSV.
-
-    Target: 'median_house_value'
-    Steps:
-    - Impute numeric with median (handles missing in total_bedrooms)
-    - One-hot encode 'ocean_proximity'
-    - Standardize numeric features
-    - Save processed features + target back to csv_path
-    - Return train/test splits
-    """
+   
     df = pd.read_csv(csv_path)
 
     if 'median_house_value' not in df.columns:
