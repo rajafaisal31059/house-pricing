@@ -6,10 +6,7 @@ from sklearn.neighbors import KNeighborsRegressor
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 
 def run_knn_on_dataset(dataset_path, target_column, k=5):
-    """
-    Runs KNN regression on a dataset and returns evaluation metrics.
-    """
-    # Load dataset
+   
     df = pd.read_csv(dataset_path)
 
     X = df.drop(columns=[target_column])
